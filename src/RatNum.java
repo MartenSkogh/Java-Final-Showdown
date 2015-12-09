@@ -20,6 +20,8 @@ public class RatNum {
             this.denom = 1;
             return;
         }
+        this.num = num;
+        this.denom = denom;
         shorten();
     }
 
