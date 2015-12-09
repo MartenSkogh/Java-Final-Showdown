@@ -67,9 +67,11 @@ public class RatNum{
 		return(sgd(n, r));		
 	}
 	
-	public String toString(){
-		return (num + "/" + denom);
-	}
+	public String toString(){return (num + "/" + denom);}
+	
+	public double toDouble(){return ((double)num)/denom;}
+	
+	
 	
 	public static void main(String[] args){
 		RatNum bajs = new RatNum(1,8);
