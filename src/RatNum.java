@@ -78,7 +78,22 @@ public class RatNum {
     }
 	
 	public RatNum parse(String s){
-		s.split()
+		boolean isInt = true;
+		try {
+			a = Integer.parseInt(s);
+		}
+		catch {
+			isInt = false;
+		}
+		
+		if(isInt){
+			b = 1;
+			return new RatNum(a,b);
+		}
+		
+		try{
+			String[] numList = s.split('\');
+		}
 	}
 
 	public double toDouble(){return ((double)num)/denom;}
