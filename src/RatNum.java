@@ -6,13 +6,12 @@
  * @author Group121
  * @version 1.0
  */
-
 public class RatNum {
 
     private int num;
     private int denom;
 
-    public RatNum(int num, int denom) throws NumberFormatException, IllegalArgumentException {
+    public RatNum(int num, int denom) throws IllegalArgumentException {
         if (denom == 0)
             throw (new NumberFormatException("Denominator equal to 0!"));
         if (num == 0) {
@@ -30,11 +29,11 @@ public class RatNum {
         denom = r.getDenominator();
     }
 
-    public RatNum(int a) throws NumberFormatException, IllegalArgumentException {
+    public RatNum(int a) throws IllegalArgumentException {
         this(a, 1);
     }
 
-    public RatNum() throws NumberFormatException, IllegalArgumentException {
+    public RatNum() throws IllegalArgumentException {
         this(0, 1);
     }
 
