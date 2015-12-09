@@ -38,9 +38,10 @@ public class RatNum {
     }
 
     /**
-     Finds the lcd of two numbers n and m.
-     @param m non-zero int
-     @param n non-zero int
+     * Finds the lcd of two numbers n and m.
+     *
+     * @param m non-zero int
+     * @param n non-zero int
      */
     public static int sgd(int m, int n) throws IllegalArgumentException {
         if (m == 0 || n == 0)
@@ -52,8 +53,13 @@ public class RatNum {
     }
 
     public static void main(String[] args) {
-        RatNum bajs = new RatNum(1, 8);
+        RatNum bajs = new RatNum(1, 2);
+        RatNum bajs2 = new RatNum(2, 1);
         System.out.println(bajs.toString());
+        System.out.println(bajs.add(bajs2));
+        System.out.println(bajs.sub(bajs2));
+        System.out.println(bajs.mul(bajs2));
+        System.out.println(bajs.div(bajs2));
     }
 
     public int getNumerator() {
@@ -62,6 +68,22 @@ public class RatNum {
 
     public int getDenominator() {
         return denom;
+    }
+
+    public RatNum add(RatNum other) {
+        return new RatNum(num * other.denom + denom * other.num, denom * other.denom);
+    }
+
+    public RatNum sub(RatNum other) {
+        return new RatNum(num * other.denom - denom * other.num, denom * other.denom);
+    }
+
+    public RatNum mul(RatNum other) {
+        return new RatNum(this.num * other.num, this.denom * other.denom);
+    }
+
+    public RatNum div(RatNum other) {
+        return new RatNum(this.num * other.denom, this.denom * other.num);
     }
 
     private void shorten() {
