@@ -105,8 +105,27 @@ public class RatNum {
             this.denom = Math.abs(denom / g);
         }
     }
+	
+	public RatNum parse(String s){
+		boolean isInt = true;
+		try {
+			a = Integer.parseInt(s);
+		}
+		catch {
+			isInt = false;
+		}
+		
+		if(isInt){
+			b = 1;
+			return new RatNum(a,b);
+		}
+		
+		try{
+			String[] numList = s.split('\');
+		}
+	}
 
-    public String toString() {
-        return (num + "/" + denom);
-    }
+	public double toDouble(){return ((double)num)/denom;}
+	
+    public String toString() {return (num + "/" + denom);}
 }
