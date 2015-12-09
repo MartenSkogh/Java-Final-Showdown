@@ -86,6 +86,14 @@ public class RatNum {
         return new RatNum(this.num * other.denom, this.denom * other.num);
     }
 
+    public boolean equals(RatNum other){
+        return (num == other.num && denom == other.denom);
+    }
+
+    public boolean lessThan(RatNum other){
+        return num.toDouble() < other.toDouble();
+    }
+
     private void shorten() {
         int g = sgd(num, denom);
 
