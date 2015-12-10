@@ -52,8 +52,8 @@ public class RatNum {
 	}
 
 
-    /**
-     * @param r
+    /** Constructs a rational number from another rantional number (copy)
+     * @param r rational number (RatNum)
      */
     public RatNum(RatNum r) {
         num = r.getNumerator();
@@ -61,7 +61,7 @@ public class RatNum {
     }
 
     /** Constructs a rational number from an integer (denominator = 1)
-     * @param r numerator
+     * @param a numerator
      */
     public RatNum(int a) throws IllegalArgumentException {
         this(a, 1);
