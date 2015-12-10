@@ -158,7 +158,8 @@ public class RatNum {
 					throw new IllegalArgumentException("String does not have correct format!\nToo many '/'s!");
 			}
 			catch (Exception e2){
-				throw new IllegalArgumentException("String does not have correct format!\nNot a fractional number!");
+
+                throw new IllegalArgumentException("String does not have correct format!\nNot a fractional number!");
 			}
 		}
 	}
@@ -175,9 +176,11 @@ public class RatNum {
 
     /** Converts this rational number to a string and simplifies if possible */
     public String toString() {
-        if (num <= denom)
+        if (num < denom)
             return (num + "/" + denom);
-        else
-            return (num / denom + " " + num % denom + "/" + denom);
+        if (num%denom == 0){
+            return  (num / denom + "");
+        }
+        return (num / denom + " " + num % denom + "/" + denom);
     }
 }
