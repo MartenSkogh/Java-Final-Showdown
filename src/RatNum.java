@@ -60,6 +60,10 @@ public class RatNum {
         System.out.println(bajs.sub(bajs2));
         System.out.println(bajs.mul(bajs2));
         System.out.println(bajs.div(bajs2));
+        System.out.println(bajs.equals(bajs2));
+        System.out.println(bajs.equals(bajs));
+        System.out.println(bajs.lessThan(bajs2));
+        System.out.println(bajs2.lessThan(bajs));
     }
 
     public int getNumerator() {
@@ -86,12 +90,12 @@ public class RatNum {
         return new RatNum(this.num * other.denom, this.denom * other.num);
     }
 
-    public boolean equals(RatNum other){
+    public boolean equals(RatNum other) {
         return (num == other.num && denom == other.denom);
     }
 
-    public boolean lessThan(RatNum other){
-        return num.toDouble() < other.toDouble();
+    public boolean lessThan(RatNum other) {
+        return toDouble() < other.toDouble();
     }
 
     private void shorten() {
@@ -105,7 +109,7 @@ public class RatNum {
             this.denom = Math.abs(denom / g);
         }
     }
-	
+
 	public RatNum parse(String s){
 		boolean isInt = true;
 		try {
@@ -114,18 +118,29 @@ public class RatNum {
 		catch {
 			isInt = false;
 		}
-		
+
 		if(isInt){
 			b = 1;
 			return new RatNum(a,b);
 		}
-		
+
 		try{
 			String[] numList = s.split('\');
 		}
 	}
 
-	public double toDouble(){return ((double)num)/denom;}
-	
-    public String toString() {return (num + "/" + denom);}
+    public Object clone() {
+        return new RatNum(this);
+    }
+
+    public double toDouble() {
+        return ((double) num) / denom;
+    }
+
+    public String toString() {
+        if (num <= denom)
+            return (num + "/" + denom);
+        else
+            return (num / denom + " " + num % denom + "/" + denom);
+    }
 }
