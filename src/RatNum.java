@@ -36,6 +36,11 @@ public class RatNum {
     }
 
 
+    /**
+     * Constructs a rational number from a string representation
+     *
+     * @param s string representation
+     */
     public RatNum(String s) {
         this(parse(s));
     }
@@ -79,20 +84,13 @@ public class RatNum {
         return (sgd(n, r));
     }
 
-    public static void main(String[] args) {
-        RatNum bajs = new RatNum(1, 2);
-        RatNum bajs2 = new RatNum(2, 1);
-        System.out.println(bajs.toString());
-        System.out.println(bajs.add(bajs2));
-        System.out.println(bajs.sub(bajs2));
-        System.out.println(bajs.mul(bajs2));
-        System.out.println(bajs.div(bajs2));
-        System.out.println(bajs.equals(bajs2));
-        System.out.println(bajs.equals(bajs));
-        System.out.println(bajs.lessThan(bajs2));
-        System.out.println(bajs2.lessThan(bajs));
-    }
 
+    /**
+     * Parses a string to a rational number
+     *
+     * @param s String to parse
+     * @return rational number
+     */
     public static RatNum parse(String s) {
         int a;
         int b;
@@ -210,14 +208,17 @@ public class RatNum {
      * Converts this rational number to a string and simplifies if possible
      */
     public String toString() {
-        if (num < denom)
+        if (Math.abs(num) < Math.abs(denom))
             return (num + "/" + denom);
         if (num % denom == 0) {
             return (num / denom + "");
         }
-        return (num / denom + " " + num % denom + "/" + denom);
+        return (num / denom + " " + Math.abs(num % denom) + "/" + denom);
     }
 
+    /**
+     * Exception that is cast when a fractional number has zero as denominator
+     */
     private class DivideByZeroException extends NumberFormatException {
 
         public DivideByZeroException(String s) {
