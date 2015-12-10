@@ -164,26 +164,22 @@ public class RatNum {
 			b = 1;
 			return new RatNum(a,b);
 		}
-		catch (Exception e1){
-			try{
-				numList = s.split("/");
-			}
-			catch (Exception e2){
-				throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
-			}
+		catch (NumberFormatException e){	}
+		
+		try{
+			numList = s.split("/");
 			if(numList.length == 2)
-				try{
-					return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
-				}
-				catch (DivideByZeroException e0){
-					throw e0;
-				}
-				catch (IllegalArgumentException e2){
-					throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
-				}
+				return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
 			else
-				throw new NumberFormatException("String does not have correct format!\n!");
+				throw new NumberFormatException();
 		}
+		
+		catch (DivideByZeroException e){throw e;}
+		
+		catch (NumberFormatException e){
+			throw new NumberFormatException("String does not have correct format!\n");
+		}
+
 	}
 
     /** Returns a copy of this rational number */
