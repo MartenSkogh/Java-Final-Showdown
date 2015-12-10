@@ -93,35 +93,6 @@ public class RatNum {
         System.out.println(bajs2.lessThan(bajs));
     }
 
-    public static RatNum parse(String s) {
-        int a;
-        int b;
-
-        String[] numList;
-
-        try {
-            a = Integer.parseInt(s);
-            b = 1;
-            return new RatNum(a, b);
-        } catch (Exception e1) {
-            try {
-                numList = s.split("/");
-            } catch (Exception e2) {
-                throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
-            }
-            if (numList.length == 2)
-                try {
-                    return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
-                } catch (DivideByZeroException e0) {
-                    throw e0;
-                } catch (IllegalArgumentException e2) {
-                    throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
-                }
-            else
-                throw new NumberFormatException("String does not have correct format!\n!");
-        }
-    }
-
     /**
      * Returns the numerator
      */
