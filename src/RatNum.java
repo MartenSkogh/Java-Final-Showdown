@@ -13,6 +13,19 @@ public class RatNum {
 
     private int num;
     private int denom;
+	
+	private class DivideByZeroException extends NumberFormatException {
+		
+		public DivideByZeroException(String s){
+			super(s);
+		}
+		
+		public DivideByZeroException(){
+			super("Don't divide by zero MF!");
+		}
+		
+	}
+	
 
     /**
      * Constructs a rational number given the numerator and denominator.
@@ -23,7 +36,7 @@ public class RatNum {
      */
     public RatNum(int num, int denom) throws IllegalArgumentException {
         if (denom == 0)
-            throw (new NumberFormatException("Denominator equal to 0!"));
+            throw (new DivideByZeroException("Denominator equal to 0!"));
         if (num == 0) {
             this.num = 0;
             this.denom = 1;
@@ -143,7 +156,9 @@ public class RatNum {
 	public static RatNum parse(String s){
 		int a;
 		int b;
-
+		
+		String[] numList;
+		
 		try {
 			a = Integer.parseInt(s);
 			b = 1;
@@ -151,15 +166,23 @@ public class RatNum {
 		}
 		catch (Exception e1){
 			try{
-				String[] numList = s.split("/");
-				if(numList.length == 2)
-					return new RatNum(Integer.parseInt(numList[1]), Integer.parseInt(numList[1]));
-				else
-					throw new IllegalArgumentException("String does not have correct format!\nToo many '/'s!");
+				numList = s.split("/");
 			}
 			catch (Exception e2){
-				throw new IllegalArgumentException("String does not have correct format!\nNot a fractional number!");
+				throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
 			}
+			if(numList.length == 2)
+				try{
+					return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
+				}
+				catch (DivideByZeroException e0){
+					throw e0;
+				}
+				catch (IllegalArgumentException e2){
+					throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
+				}
+			else
+				throw new NumberFormatException("String does not have correct format!\n!");
 		}
 	}
 
