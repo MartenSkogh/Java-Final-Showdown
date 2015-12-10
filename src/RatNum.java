@@ -14,23 +14,11 @@ public class RatNum {
     private int num;
     private int denom;
 
-	private class DivideByZeroException extends NumberFormatException {
-
-		public DivideByZeroException(String s){
-			super(s);
-		}
-
-		public DivideByZeroException(){
-			super("Don't divide by zero MF!");
-		}
-
-	}
-
-
     /**
      * Constructs a rational number given the numerator and denominator.
      * Also simplifies it to the shortest possible form
-     * @param num numerator
+     *
+     * @param num   numerator
      * @param denom denominator
      * @throws IllegalArgumentException
      */
@@ -47,12 +35,14 @@ public class RatNum {
         shorten();
     }
 
-	public RatNum(String s){
-		this(parse(s));
-	}
 
+    public RatNum(String s) {
+        this(parse(s));
+    }
 
-    /** Constructs a rational number from another rantional number (copy)
+    /**
+     * Constructs a rational number from another rantional number (copy)
+     *
      * @param r rational number (RatNum)
      */
     public RatNum(RatNum r) {
@@ -60,7 +50,10 @@ public class RatNum {
         denom = r.getDenominator();
     }
 
-    /** Constructs a rational number from an integer (denominator = 1)
+
+    /**
+     * Constructs a rational number from an integer (denominator = 1)
+     *
      * @param a numerator
      */
     public RatNum(int a) throws IllegalArgumentException {
@@ -100,47 +93,94 @@ public class RatNum {
         System.out.println(bajs2.lessThan(bajs));
     }
 
-    /** Returns the numerator */
+    public static RatNum parse(String s) {
+        int a;
+        int b;
+
+        String[] numList;
+
+        try {
+            a = Integer.parseInt(s);
+            b = 1;
+            return new RatNum(a, b);
+        } catch (Exception e1) {
+            try {
+                numList = s.split("/");
+            } catch (Exception e2) {
+                throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
+            }
+            if (numList.length == 2)
+                try {
+                    return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
+                } catch (DivideByZeroException e0) {
+                    throw e0;
+                } catch (IllegalArgumentException e2) {
+                    throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
+                }
+            else
+                throw new NumberFormatException("String does not have correct format!\n!");
+        }
+    }
+
+    /**
+     * Returns the numerator
+     */
     public int getNumerator() {
         return num;
     }
 
-    /** Returns the denominator */
+    /**
+     * Returns the denominator
+     */
     public int getDenominator() {
         return denom;
     }
 
-    /** Adds this rational number to another rational number and returns the result */
+    /**
+     * Adds this rational number to another rational number and returns the result
+     */
     public RatNum add(RatNum other) {
         return new RatNum(num * other.denom + denom * other.num, denom * other.denom);
     }
 
-    /** Subtracts this rational number from another rational number and returns the result */
+    /**
+     * Subtracts this rational number from another rational number and returns the result
+     */
     public RatNum sub(RatNum other) {
         return new RatNum(num * other.denom - denom * other.num, denom * other.denom);
     }
 
-    /** Multiplies this rational number with another rational number and returns the result */
+    /**
+     * Multiplies this rational number with another rational number and returns the result
+     */
     public RatNum mul(RatNum other) {
         return new RatNum(this.num * other.num, this.denom * other.denom);
     }
 
-    /** Divides this rational number by another rational number and returns the result */
+    /**
+     * Divides this rational number by another rational number and returns the result
+     */
     public RatNum div(RatNum other) {
         return new RatNum(this.num * other.denom, this.denom * other.num);
     }
 
-    /** Returns true if this number is equal to the other number */
+    /**
+     * Returns true if this number is equal to the other number
+     */
     public boolean equals(RatNum other) {
         return (num == other.num && denom == other.denom);
     }
 
-    /** Returns true if this number is smaller than the other number */
+    /**
+     * Returns true if this number is smaller than the other number
+     */
     public boolean lessThan(RatNum other) {
         return toDouble() < other.toDouble();
     }
 
-    /** Shortens this rational number to the smallest possible format (eg: 2/4 --> 1/2) */
+    /**
+     * Shortens this rational number to the smallest possible format (eg: 2/4 --> 1/2)
+     */
     private void shorten() {
         int g = sgd(num, denom);
 
@@ -153,56 +193,41 @@ public class RatNum {
         }
     }
 
-	public static RatNum parse(String s){
-		int a;
-		int b;
-
-		String[] numList;
-
-		try {
-			a = Integer.parseInt(s);
-			b = 1;
-			return new RatNum(a,b);
-		}
-		catch (Exception e1){
-			try{
-				numList = s.split("/");
-			}
-			catch (Exception e2){
-				throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
-			}
-			if(numList.length == 2)
-				try{
-					return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
-				}
-				catch (DivideByZeroException e0){
-					throw e0;
-				}
-				catch (IllegalArgumentException e2){
-					throw new NumberFormatException("String does not have correct format!\nNot a fractional number!");
-				}
-			else
-				throw new NumberFormatException("String does not have correct format!\n!");
-		}
-	}
-
-    /** Returns a copy of this rational number */
+    /**
+     * Returns a copy of this rational number
+     */
     public Object clone() {
         return new RatNum(this);
     }
 
-    /** Converts this rational number to a decimal number (double) */
+    /**
+     * Converts this rational number to a decimal number (double)
+     */
     public double toDouble() {
         return ((double) num) / denom;
     }
 
-    /** Converts this rational number to a string and simplifies if possible */
+    /**
+     * Converts this rational number to a string and simplifies if possible
+     */
     public String toString() {
         if (num < denom)
             return (num + "/" + denom);
-        if (num%denom == 0){
-            return  (num / denom + "");
+        if (num % denom == 0) {
+            return (num / denom + "");
         }
         return (num / denom + " " + num % denom + "/" + denom);
+    }
+
+    private class DivideByZeroException extends NumberFormatException {
+
+        public DivideByZeroException(String s) {
+            super(s);
+        }
+
+        public DivideByZeroException() {
+            super("Don't divide by zero MF!");
+        }
+
     }
 }
