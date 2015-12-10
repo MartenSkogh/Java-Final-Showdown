@@ -99,21 +99,27 @@ public class RatNum {
     }
 	
 	public RatNum parse(String s){
-		boolean isInt = true;
+		int a;
+		int b;
+		
+		Exception e;
+		
 		try {
 			a = Integer.parseInt(s);
-		}
-		catch {
-			isInt = false;
-		}
-		
-		if(isInt){
 			b = 1;
 			return new RatNum(a,b);
 		}
-		
-		try{
-			String[] numList = s.split('\');
+		catch (Exception e1){
+			try{
+				String[] numList = s.split("/");
+				if(numList.length == 2)
+					return new RatNum(Integer.parseInt(numList[1]), Integer.parseInt(numList[1]));
+				else
+					throw new IllegalArgumentException("String does not have correct format!\nToo many '/'s!");
+			}
+			catch (Exception e2){
+				throw new IllegalArgumentException("String does not have correct format!\n Not a fractional number!");
+			}
 		}
 	}
 
