@@ -1,5 +1,8 @@
 /**
- * A program that
+ * A representation of rational numbers.
+ * Can perform basic mathematical operations and
+ * comparison operations. Can created in multiple
+ * ways, including from a string.
  *
  * @author Mårten Skogh
  * @author Adam Tonderski
@@ -11,6 +14,13 @@ public class RatNum {
     private int num;
     private int denom;
 
+    /**
+     * Constructs a rational number given the numerator and denominator.
+     * Also simplifies it to the shortest possible form
+     * @param num numerator
+     * @param denom denominator
+     * @throws IllegalArgumentException
+     */
     public RatNum(int num, int denom) throws IllegalArgumentException {
         if (denom == 0)
             throw (new NumberFormatException("Denominator equal to 0!"));
@@ -27,12 +37,19 @@ public class RatNum {
 	public RatNum(String s){
 		this(parse(s));
 	}
-	
+
+
+    /**
+     * @param r
+     */
     public RatNum(RatNum r) {
         num = r.getNumerator();
         denom = r.getDenominator();
     }
 
+    /** Constructs a rational number from an integer (denominator = 1)
+     * @param r numerator
+     */
     public RatNum(int a) throws IllegalArgumentException {
         this(a, 1);
     }
@@ -70,38 +87,47 @@ public class RatNum {
         System.out.println(bajs2.lessThan(bajs));
     }
 
+    /** Returns the numerator */
     public int getNumerator() {
         return num;
     }
 
+    /** Returns the denominator */
     public int getDenominator() {
         return denom;
     }
 
+    /** Adds this rational number to another rational number and returns the result */
     public RatNum add(RatNum other) {
         return new RatNum(num * other.denom + denom * other.num, denom * other.denom);
     }
 
+    /** Subtracts this rational number from another rational number and returns the result */
     public RatNum sub(RatNum other) {
         return new RatNum(num * other.denom - denom * other.num, denom * other.denom);
     }
 
+    /** Multiplies this rational number with another rational number and returns the result */
     public RatNum mul(RatNum other) {
         return new RatNum(this.num * other.num, this.denom * other.denom);
     }
 
+    /** Divides this rational number by another rational number and returns the result */
     public RatNum div(RatNum other) {
         return new RatNum(this.num * other.denom, this.denom * other.num);
     }
 
+    /** Returns true if this number is equal to the other number */
     public boolean equals(RatNum other) {
         return (num == other.num && denom == other.denom);
     }
 
+    /** Returns true if this number is smaller than the other number */
     public boolean lessThan(RatNum other) {
         return toDouble() < other.toDouble();
     }
 
+    /** Shortens this rational number to the smallest possible format (eg: 2/4 --> 1/2) */
     private void shorten() {
         int g = sgd(num, denom);
 
@@ -117,7 +143,7 @@ public class RatNum {
 	public static RatNum parse(String s){
 		int a;
 		int b;
-				
+
 		try {
 			a = Integer.parseInt(s);
 			b = 1;
@@ -137,14 +163,17 @@ public class RatNum {
 		}
 	}
 
+    /** Returns a copy of this rational number */
     public Object clone() {
         return new RatNum(this);
     }
 
+    /** Converts this rational number to a decimal number (double) */
     public double toDouble() {
         return ((double) num) / denom;
     }
 
+    /** Converts this rational number to a string and simplifies if possible */
     public String toString() {
         if (num <= denom)
             return (num + "/" + denom);
