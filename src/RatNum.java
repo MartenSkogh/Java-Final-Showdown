@@ -93,6 +93,33 @@ public class RatNum {
         System.out.println(bajs2.lessThan(bajs));
     }
 
+    public static RatNum parse(String s) {
+        int a;
+        int b;
+
+        String[] numList;
+
+        try {
+            a = Integer.parseInt(s);
+            b = 1;
+            return new RatNum(a, b);
+        } catch (NumberFormatException e) {
+        }
+
+        try {
+            numList = s.split("/");
+            if (numList.length == 2)
+                return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
+            else
+                throw new NumberFormatException();
+        } catch (DivideByZeroException e) {
+            throw e;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("String does not have correct format!\n");
+        }
+
+    }
+
     /**
      * Returns the numerator
      */
@@ -163,36 +190,6 @@ public class RatNum {
             this.denom = Math.abs(denom / g);
         }
     }
-
-
-	public static RatNum parse(String s){
-		int a;
-		int b;
-		
-		String[] numList;
-		
-		try {
-			a = Integer.parseInt(s);
-			b = 1;
-			return new RatNum(a,b);
-		}
-		catch (NumberFormatException e){	}
-		
-		try{
-			numList = s.split("/");
-			if(numList.length == 2)
-				return new RatNum(Integer.parseInt(numList[0]), Integer.parseInt(numList[1]));
-			else
-				throw new NumberFormatException();
-		}
-		
-		catch (DivideByZeroException e){throw e;}
-		
-		catch (NumberFormatException e){
-			throw new NumberFormatException("String does not have correct format!\n");
-		}
-
-	}
 
     /**
      * Returns a copy of this rational number
