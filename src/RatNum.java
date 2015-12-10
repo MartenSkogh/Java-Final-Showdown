@@ -117,9 +117,7 @@ public class RatNum {
 	public static RatNum parse(String s){
 		int a;
 		int b;
-		
-		Exception e;
-		
+				
 		try {
 			a = Integer.parseInt(s);
 			b = 1;
@@ -134,7 +132,7 @@ public class RatNum {
 					throw new IllegalArgumentException("String does not have correct format!\nToo many '/'s!");
 			}
 			catch (Exception e2){
-				throw new IllegalArgumentException("String does not have correct format!\n Not a fractional number!");
+				throw new IllegalArgumentException("String does not have correct format!\nNot a fractional number!");
 			}
 		}
 	}
