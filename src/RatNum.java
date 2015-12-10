@@ -24,6 +24,10 @@ public class RatNum {
         shorten();
     }
 
+	public RatNum(String s){
+		this(parse(s));
+	}
+	
     public RatNum(RatNum r) {
         num = r.getNumerator();
         denom = r.getDenominator();
@@ -110,7 +114,7 @@ public class RatNum {
         }
     }
 
-	public RatNum parse(String s){
+	public static RatNum parse(String s){
 		int a;
 		int b;
 		
