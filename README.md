@@ -16,9 +16,8 @@ lösningarna med resultaten från vår implementation av RatNum. Om något
 inte stämmer så skriver det ut vilket av fallen som misslyckades och 
 avslutar sedan programmet. Det kollar även om vi kastar rätt typ av 
 exception. Här är resultatet av vår körning:
-'''
 >Inga fel!
-'''
+
 
 3. RatNumTest3 testar de olika funktioner som utgör den tredje delen av 
 laborationen. Den testar likheter mellan rationella tal och matematiska 
