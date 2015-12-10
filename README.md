@@ -1,8 +1,10 @@
 ﻿# Programmeringsteknik
 
-Mårten Skogh 
-Adam Tonderski
-Grupp 121
+*Mårten Skogh*
+
+*Adam Tonderski*
+
+**Grupp 121**
 
 
 1. Det som ställde till det mest för oss var hanterandet av undantag i 
